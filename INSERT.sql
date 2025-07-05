@@ -1,49 +1,24 @@
 INSERT INTO genres ("name")
-VALUES ('Европоп'), ('Камерная музыка'), ('Психоделический фолк');
-
-INSERT INTO genres ("name")
-VALUES ('Средневековый металл');
+VALUES ('Шансон'), ('Блюз'), ('Фолк'), ('Классика');
 
 INSERT INTO singers ("name")
-VALUES ('Thomas Anders'), ('Франц Шуберт'), ('Феликс Мендельсон'), ('Tim Buckley'), ('Lucina'), ('In Extremo'), ('Haggard');
-
-SELECT * FROM singers;
+VALUES ('Иванов Иван'), ('Крутая Плесень'), ('Синий Дым'), ('Романовский'), ('Haggard');
 
 INSERT INTO genresinger ("genre_id", "singer_id")
-VALUES ('1', '1'), ('2', '2'), ('2', '3'), ('3', '4'), ('3', '5'), ('4', '6'), ('4', '7'); 
+VALUES ('1', '3'), ('2', '2'), ('3', '1'), ('3', '5'), ('4', '4'); 
 
 INSERT INTO albums ("name", "album_year")
-VALUES ('Pures Leben', '2017'), ('Goodbuy and Hello', '1967'), ('Quid Pro Quo', '2016');
+VALUES ('Альбом 1', '2017'), ('Альбом 2', '2018'), ('Альбом 3', '2019'), ('Альбом 4', '2020'), ('Альбом 5', '2021');
 
 INSERT INTO tracks ("name", "duration", "album_id")
-VALUES ('Sternenregen', '222', '1'), ('Feuerwerk', '212', '1'), ('Hallucination', '296', '2'), ('Morning Glory', '171', '2'),
-('Stortebeker', '215', '3'), ('Moonshiner', '272', '3');
-
-INSERT INTO tracksinger ("track_id", "singer_id")
-VALUES ('1', '1'), ('2', '1'), ('3', '2'), ('4', '2'), ('5', '3'), ('6', '3');
+VALUES ('My own', '222', '1'), ('Own my', '212', '2'), ('My', '296', '3'), ('Oh my God', '171', '4'), ('Myself', '245', '5'), ('By myself', '365', '1'),
+('Bemy self', '215', '2'), ('Myself by', '272', '3'), ('By myself by', '412', '4'), ('Beemy', '145', '5'), ('Premyne', '356', '5');
 
 INSERT INTO collections ("name", "collection_year")
 VALUES ('Collection-18', '2018'), ('Collection-19', '2019'), ('Collection-23', '2023'), ('Collection-24', '2024'); 
 
-INSERT INTO trackcollection ("track_id", "collection_id")
-VALUES (1, 1), (1, 4), (2, 2), (2, 4), (3, 1), (3, 2), (3, 3), (4, 1), (4, 3), (4, 4), (5, 2), (5, 3), (5, 4), (6, 1), (6, 2), (6, 3);
-
-
-INSERT INTO tracks ("name", "duration", "album_id")
-VALUES ('Love Of My Own', 523, 1);
-
-INSERT INTO albums ("name", album_year)
-VALUES ('Kompass zur Sonne', 2020);
-
-INSERT INTO albums ("name", album_year)
-VALUES ('Zooom', 2020);
-
-INSERT INTO tracks ("name", duration, album_id)
-VALUES ('Gehören wir dazu', 153, 5);
-
-INSERT INTO tracks ("name", duration, album_id)
-VALUES ('Lügenpack', 223, 4);
+INSERT INTO collectiontrack  ("collection_id", "track_id")
+VALUES (1, 1), (2, 2), (3, 3), (4, 4), (1, 5), (2, 6), (3, 7), (4, 8), (1, 9), (2, 10), (3, 11), (4, 1), (1, 2), (2, 3), (3, 4), (4, 5);
 
 INSERT INTO singeralbum (singer_id, album_id)
-VALUES (1, 1), (4, 2), (6, 3), (6, 4), (1, 5);
-
+VALUES (1, 1), (2, 2), (3, 3), (4, 4), (5, 5);

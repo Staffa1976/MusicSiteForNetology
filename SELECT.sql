@@ -11,36 +11,39 @@ SELECT * FROM singers
 WHERE name NOT LIKE '% %';
 
 SELECT name FROM tracks
-WHERE name ILIKE '%my%' OR name ILIKE '%мой%';
+WHERE (string_to_array(LOWER(name), ' ') && ARRAY ['my'])
+OR (string_to_array(LOWER(name), ' ') && ARRAY ['мой']);
 
 SELECT name n, count(singer_id) FROM genres g
 LEFT JOIN genresinger g2 ON g.genre_id = g2.genre_id
 GROUP BY g."name"
 ;
 
-SELECT a."name", count(track_id ) FROM albums a
+SELECT count(track_id ) FROM albums a
 LEFT JOIN tracks t ON a.album_id = t.album_id
 WHERE album_year BETWEEN 2019 AND 2020
-GROUP BY a."name" 
 ;
 
 SELECT a."name", AVG(duration) FROM albums a 
 LEFT JOIN tracks t ON a.album_id = t.album_id
 GROUP BY a."name";
 
-SELECT s."name", s2.album_id, a.album_year   FROM singers s
-left JOIN singeralbum s2   ON s.singer_id = s2.singer_id
-LEFT JOIN albums a ON s2.album_id = a.album_id
-WHERE a.album_year != 2020
-; 
+SELECT s."name" FROM singers s
+WHERE s."name" NOT IN (
+    SELECT s."name" FROM singers s 
+    LEFT JOIN singeralbum s2 ON  s.singer_id = s2.singer_id
+    LEFT JOIN albums a ON s2.album_id = a.album_id
+    WHERE album_year = 2020);
 
---Thomas Anders
-SELECT c."name" FROM collections c 
-LEFT JOIN trackcollection t ON c.collection_id = t.collection_id
-LEFT JOIN tracksinger t2 ON t.track_id = t2.track_id
-JOIN singers s ON t2.singer_id = 1
-GROUP BY c."name"
+--Романовский
+SELECT c."name" FROM collections c
+LEFT JOIN collectiontrack c2 ON c.collection_id = c2.collection_id
+LEFT JOIN tracks t ON c2.track_id = t.track_id
+LEFT JOIN albums a ON t.album_id = a.album_id
+LEFT JOIN singeralbum s ON a.album_id = s.album_id
+LEFT JOIN singers s2 ON s.singer_id = s2.singer_id
+WHERE s2."name" = 'Романовский';
 
-;
+
 
 
